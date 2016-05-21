@@ -6,7 +6,9 @@
     <!-- required for sdk's lower than 18 -->
     <uses-sdk tools:overrideLibrary="android.support.test.uiautomator.v18"/>
 
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:allowBackup="true"

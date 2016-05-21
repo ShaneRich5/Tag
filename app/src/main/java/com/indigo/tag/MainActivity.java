@@ -45,7 +45,13 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void setupCoordinateRecycler() {
-        mAdapter = new LocationAdapter(new ArrayList<Location>());
+        mAdapter = new LocationAdapter(new ArrayList<Location>(), new LocationAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position, Location location) {
+                LocationDialog.newInstance(location)
+                        .show(getSupportFragmentManager(), LocationDialog.TAG);
+            }
+        });
         recyclerCoordinates.setLayoutManager(new LinearLayoutManager(this));
         recyclerCoordinates.addItemDecoration(new DividerItemDecoration(this, LinearLayout.VERTICAL));
         recyclerCoordinates.setAdapter(mAdapter);
@@ -68,8 +74,8 @@ public class MainActivity extends AppCompatActivity
 
     @OnClick(R.id.fab_add_coordinate)
     public void openAddCoordinateDialog(View view) {
-        final LocationDialog locationDialog = LocationDialog.newInstance();
-        locationDialog.show(getSupportFragmentManager(), "coordinates");
+        LocationDialog.newInstance()
+                .show(getSupportFragmentManager(), LocationDialog.TAG);
     }
 
     @Override
@@ -135,12 +141,12 @@ public class MainActivity extends AppCompatActivity
 
             @Override
             public void onClick(View v) {
-                if (mItemClickListener != null) mItemClickListener.onItemClick(v, getLayoutPosition());
+                if (mItemClickListener != null) mItemClickListener.onItemClick(v, getLayoutPosition(), mLocations.get(getLayoutPosition()));
             }
         }
 
         public interface OnItemClickListener {
-            void onItemClick(View view, int position);
+            void onItemClick(View view, int position, Location location);
         }
     }
 }
