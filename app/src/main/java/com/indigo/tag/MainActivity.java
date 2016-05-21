@@ -12,10 +12,12 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.indigo.tag.dialogs.LocationDialog;
 import com.indigo.tag.models.Location;
+import com.indigo.tag.views.DividerItemDecoration;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +47,7 @@ public class MainActivity extends AppCompatActivity
     private void setupCoordinateRecycler() {
         mAdapter = new LocationAdapter(new ArrayList<Location>());
         recyclerCoordinates.setLayoutManager(new LinearLayoutManager(this));
+        recyclerCoordinates.addItemDecoration(new DividerItemDecoration(this, LinearLayout.VERTICAL));
         recyclerCoordinates.setAdapter(mAdapter);
     }
 
@@ -65,7 +68,7 @@ public class MainActivity extends AppCompatActivity
 
     @OnClick(R.id.fab_add_coordinate)
     public void openAddCoordinateDialog(View view) {
-        final LocationDialog locationDialog = new LocationDialog();
+        final LocationDialog locationDialog = LocationDialog.newInstance();
         locationDialog.show(getSupportFragmentManager(), "coordinates");
     }
 
@@ -81,9 +84,19 @@ public class MainActivity extends AppCompatActivity
 
     public static class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.LocationViewHolder> {
         private List<Location> mLocations;
+        private OnItemClickListener mItemClickListener;
 
-        public LocationAdapter(List<Location> mLocations) {
-            this.mLocations = mLocations;
+        public LocationAdapter(List<Location> locations, OnItemClickListener listener) {
+            this.mLocations = locations;
+            mItemClickListener = listener;
+        }
+
+        public LocationAdapter(List<Location> locations) {
+            this(locations, null);
+        }
+
+        public void setOnClickListener(OnItemClickListener listener) {
+            mItemClickListener = listener;
         }
 
         public void addLocation(Location location) {
@@ -110,7 +123,8 @@ public class MainActivity extends AppCompatActivity
             return mLocations.size();
         }
 
-        public static class LocationViewHolder extends RecyclerView.ViewHolder {
+        public class LocationViewHolder extends RecyclerView.ViewHolder
+                implements View.OnClickListener{
             @BindView(R.id.text_view_name) TextView mTextViewName;
             @BindView(R.id.text_view_coordinates) TextView mTextViewCoordinate;
 
@@ -118,6 +132,15 @@ public class MainActivity extends AppCompatActivity
                 super(itemView);
                 ButterKnife.bind(this, itemView);
             }
+
+            @Override
+            public void onClick(View v) {
+                if (mItemClickListener != null) mItemClickListener.onItemClick(v, getLayoutPosition());
+            }
+        }
+
+        public interface OnItemClickListener {
+            void onItemClick(View view, int position);
         }
     }
 }
