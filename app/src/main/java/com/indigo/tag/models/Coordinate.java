@@ -1,15 +1,23 @@
-package com.indigo.tag;
+package com.indigo.tag.models;
+
+import android.os.Parcel;
+import android.os.Parcelable;
 
 /**
  * Created by Shane on 5/20/2016.
  */
-public class Coordinate {
+public class Coordinate implements Parcelable {
     private double latitude;
     private double longitude;
 
     public Coordinate(double latitude, double longitude) {
         this.latitude = latitude;
         this.longitude = longitude;
+    }
+
+    private Coordinate(Parcel in){
+        latitude = in.readDouble();
+        longitude = in.readDouble();
     }
 
     public double getLatitude() {
@@ -42,4 +50,35 @@ public class Coordinate {
 
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "Latitude: " + latitude + "\n" +
+                "Longitude: " + longitude;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeDouble(latitude);
+        dest.writeDouble(longitude);
+    }
+
+    public static final Parcelable.Creator<Coordinate> CREATOR
+            = new Parcelable.Creator<Coordinate>() {
+
+        @Override
+        public Coordinate createFromParcel(Parcel source) {
+            return new Coordinate(source);
+        }
+
+        @Override
+        public Coordinate[] newArray(int size) {
+            return new Coordinate[size];
+        }
+    };
 }

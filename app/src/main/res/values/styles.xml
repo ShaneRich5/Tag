@@ -19,6 +19,12 @@
 
     <style name="LargeText">
         <item name="android:textSize">@dimen/font_large</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="NormalText">
+        <item name="android:textSize">@dimen/font_normal</item>
+        <item name="android:textColor">@color/black</item>
     </style>
 
 </resources>

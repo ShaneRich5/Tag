@@ -1,4 +1,6 @@
-package com.indigo.tag;
+package com.indigo.tag.models;
+
+import com.indigo.tag.models.Coordinate;
 
 import org.junit.Test;
 
@@ -11,7 +13,13 @@ public class CoordinateTest {
 
     @Test
     public void testEquals() throws Exception {
-        final Coordinate coordinate = new
+        final Coordinate coordinateA = new Coordinate(12.45, 134.39);
+        final Coordinate coordinateB = new Coordinate(12.45, 134.39);
+        final Coordinate coordinateC = new Coordinate(154.356, 134.39);
+
+        assertEquals(coordinateA, coordinateA);
+        assertEquals(coordinateB, coordinateB);
+        assertNotEquals(coordinateA, coordinateC);
     }
 
     @Test

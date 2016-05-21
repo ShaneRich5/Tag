@@ -2,13 +2,21 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="@dimen/item_list_two_rows"
+    android:gravity="center_vertical">
 
     <TextView
         android:id="@+id/text_view_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style=""
+        style="@style/LargeText"
+        />
+
+    <TextView
+        android:id="@+id/text_view_coordinates"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/NormalText"
         />
 
 </LinearLayout>
