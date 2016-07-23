@@ -51,11 +51,6 @@ public class Location implements Parcelable {
     }
 
     @Override
-    public String toString() {
-        return "Name: " + name + "\n" + coordinate;
-    }
-
-    @Override
     public int describeContents() {
         return 0;
     }

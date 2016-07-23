@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "573338914368",
+    "firebase_url": "https://tagg-72278.firebaseio.com",
+    "project_id": "tagg-72278",
+    "storage_bucket": "tagg-72278.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:573338914368:android:71b1b7a1b9738c6c",
+        "android_client_info": {
+          "package_name": "com.indigo.tag"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "573338914368-o399f6vufd69nds18rf6oiatvotuj6rd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCFHEhO4NCKPL_01O1PAt9WbSy9Mmr7s9A"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

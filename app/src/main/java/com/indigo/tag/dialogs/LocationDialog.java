@@ -105,12 +105,9 @@ public class LocationDialog extends DialogFragment {
                 })
                 .setNegativeButton("Cancel", (dialog, which) -> {
                     mListener.onDialogNegativeClick(LocationDialog.this);
-                }).setNeutralButton("Refresh", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
+                }).setNeutralButton("Refresh", (dialog, which) -> {
 
-            }
-        });
+                });
 
         setupLocationService();
 
