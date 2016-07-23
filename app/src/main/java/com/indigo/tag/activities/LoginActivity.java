@@ -44,6 +44,7 @@ public class LoginActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (isUserSignedIn()) startActivity(new Intent(LoginActivity.this, MainActivity.class));
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
         toggleRegisterViewsVisibility(mConnectState.equals(REGISTER_STATE));

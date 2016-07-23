@@ -66,7 +66,8 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     public boolean isUserSignedIn() {
-        return getFirebaseUser() != null;
+        final FirebaseUser user = getFirebaseUser();
+        return user != null && ! user.isAnonymous();
     }
 
     public FirebaseUser getFirebaseUser() {
