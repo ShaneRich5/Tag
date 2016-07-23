@@ -24,4 +24,8 @@
     <dimen name="button_height_short">32dp</dimen>
 
     <dimen name="item_list_two_rows">72dp</dimen>
+
+    <dimen name="start_offset">16dp</dimen>
+    <dimen name="end_offset">16dp</dimen>
+    <dimen name="divider_size">8dp</dimen>
 </resources>
