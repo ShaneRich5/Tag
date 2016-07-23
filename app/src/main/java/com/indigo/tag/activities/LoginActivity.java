@@ -46,6 +46,7 @@ public class LoginActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
+        toggleRegisterViewsVisibility(mConnectState.equals(REGISTER_STATE));
     }
 
     @OnClick(R.id.button_connect)
@@ -59,13 +60,13 @@ public class LoginActivity extends BaseActivity {
     }
 
     private void attemptRegister() {
-        final String email = mEditTextEmail.getText().toString();
-        final String password = mEditTextPassword.getText().toString();
-        final String firstName = mEditTextFirstName.getText().toString();
-        final String lastName = mEditTextLastName.getText().toString();
-        final String confirm = mEditTextConfirm.getText().toString();
+        final String email = mEditTextEmail.getText().toString().trim();
+        final String password = mEditTextPassword.getText().toString().trim();
+        final String firstName = mEditTextFirstName.getText().toString().trim();
+        final String lastName = mEditTextLastName.getText().toString().trim();
+        final String confirm = mEditTextConfirm.getText().toString().trim();
 
-        if (email.isEmpty() || password.isEmpty() || firstName.isEmpty() ||
+        if (email.isEmpty() || password.length() < 6 || firstName.isEmpty() ||
                 lastName.isEmpty() || confirm.isEmpty()) {
             // TODO
             return;
@@ -81,11 +82,9 @@ public class LoginActivity extends BaseActivity {
 
                     startActivity(new Intent(LoginActivity.this, MainActivity.class));
                 })
-                .addOnCompleteListener(task -> {
-                    Log.d(TAG, "createUserWithEmail:onComplete:" + task.isSuccessful());
-                    if (!task.isSuccessful())
-                        Toast.makeText(LoginActivity.this, "Authentication failed.",
-                                Toast.LENGTH_SHORT).show();
+                .addOnFailureListener(e -> {
+                    Log.e(TAG, "login:failure", e);
+                    Toast.makeText(LoginActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
                 });
     }
 
@@ -156,6 +155,11 @@ public class LoginActivity extends BaseActivity {
                 getResources().getString(R.string.already_registered) :
                 getResources().getString(R.string.not_registered);
 
+        final String connectButtonText = (isVisible) ?
+                getResources().getString(R.string.register) :
+                getResources().getString(R.string.login);
+
+        mButtonConnect.setText(connectButtonText);
         mTextViewConnectState.setText(connectHelpMessage);
     }
 }

@@ -22,4 +22,5 @@
     <string name="update">Update</string>
     <string name="longitude">Longitude</string>
     <string name="latitude">Latitude</string>
+    <string name="register">register</string>
 </resources>
