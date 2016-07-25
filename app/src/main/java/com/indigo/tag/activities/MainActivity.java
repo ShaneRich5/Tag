@@ -1,11 +1,14 @@
 package com.indigo.tag.activities;
 
 import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -22,7 +25,9 @@ import com.indigo.tag.adapters.ProjectAdapter;
 import com.indigo.tag.events.LoginEvent;
 import com.indigo.tag.events.LogoutEvent;
 import com.indigo.tag.models.Project;
-import com.indigo.tag.views.DividerItemDecoration;
+import com.indigo.tag.views.itemdecorations.DividerItemDecoration;
+import com.indigo.tag.views.itemdecorations.EndOffsetItemDecoration;
+import com.indigo.tag.views.itemdecorations.StartOffsetItemDecoration;
 
 import org.greenrobot.eventbus.Subscribe;
 
@@ -48,6 +53,7 @@ public class MainActivity extends BaseActivity {
         setSupportActionBar(toolbar);
         setupCoordinateRecycler();
         loadProjects();
+
     }
 
     private void loadProjects() {
@@ -55,10 +61,17 @@ public class MainActivity extends BaseActivity {
     }
 
     private void setupCoordinateRecycler() {
+        final Resources resources = getResources();
+        final int startOffset =  resources.getDimensionPixelOffset(R.dimen.start_offset);
+        final int endOffset =  resources.getDimensionPixelOffset(R.dimen.end_offset);
+        final Drawable dividerDrawable = ContextCompat.getDrawable(this, R.drawable.divider_gray);
+
         mProjectAdapter = new ProjectAdapter(this);
         mRecyclerViewProject.setAdapter(mProjectAdapter);
-        mRecyclerViewProject.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST));
         mRecyclerViewProject.setLayoutManager(new LinearLayoutManager(this));
+        mRecyclerViewProject.addItemDecoration(new StartOffsetItemDecoration(startOffset));
+        mRecyclerViewProject.addItemDecoration(new EndOffsetItemDecoration(endOffset));
+        mRecyclerViewProject.addItemDecoration(new DividerItemDecoration(dividerDrawable));
     }
 
     @Override

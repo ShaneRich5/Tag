@@ -1,5 +1,6 @@
 package com.indigo.tag.models;
 
+import com.google.firebase.database.Exclude;
 import com.google.firebase.database.IgnoreExtraProperties;
 
 import java.io.Serializable;
@@ -19,6 +20,8 @@ import lombok.ToString;
 @NoArgsConstructor
 @IgnoreExtraProperties
 public class Project implements Serializable {
+    @Exclude
+    private int id;
     private String name;
     private String description;
     private List<Location> locations;
